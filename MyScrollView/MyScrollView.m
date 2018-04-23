@@ -8,18 +8,11 @@
 
 #import "MyScrollView.h"
 
-@interface MyScrollView ()
-
-
-
-@end
-
 @implementation MyScrollView
 
 - (instancetype)init {
     self = [self initWithFrame:CGRectZero];
     if (self) {
-        
         UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGestureRecognizer:)];
         [self addGestureRecognizer:panGesture];
     }
@@ -29,17 +22,14 @@
 - (void)handlePanGestureRecognizer:(UIPanGestureRecognizer *)sender {
     CGPoint translationInView = [sender translationInView:self];
     CGRect bounds = self.bounds;
-    
     bounds.origin.x-= translationInView.x;
     bounds.origin.y-= translationInView.y;
     if (bounds.origin.y > _contentSize.height) {
-        NSLog(@"out of x bounds");
         bounds.origin.y = _contentSize.height;
     }
     if (bounds.origin.x > _contentSize.width){
         bounds.origin.x = _contentSize.width;
     }
-    NSLog(@"X:%f,Y:%f", bounds.origin.x, bounds.origin.y);
     if (bounds.origin.x < 0) {
         bounds.origin.x = 0;
     }
